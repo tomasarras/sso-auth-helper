@@ -1,0 +1,17 @@
+{
+  "name": "sso-auth-helper",
+  "version": "1.0.0",
+  "description": "Discourse sso session handler",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tomas Arras",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "redis": "^4.6.5"
+  }
+}

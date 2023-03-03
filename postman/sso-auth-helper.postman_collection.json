@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "a81b9f08-60de-410b-98da-22fa4ef53fbf",
+		"name": "sso-auth-helper",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Redirect to login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const redirectUrl = pm.response.headers.get('location');",
+							"const sso = redirectUrl.split(\"?\")[1].split(\"=\")[1].split(\"&\")[0]",
+							"const sig = redirectUrl.split(\"?\")[1].split(\"&\")[1].split(\"=\")[1];",
+							"postman.setEnvironmentVariable(\"sso\", sso);",
+							"postman.setEnvironmentVariable(\"sig\", sig);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host_url}}/session/sso",
+					"host": [
+						"{{host_url}}"
+					],
+					"path": [
+						"session",
+						"sso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host_url}}/session/sso?sso={{sso}}&sig={{sig}}",
+					"host": [
+						"{{host_url}}"
+					],
+					"path": [
+						"session",
+						"sso"
+					],
+					"query": [
+						{
+							"key": "sso",
+							"value": "{{sso}}"
+						},
+						{
+							"key": "sig",
+							"value": "{{sig}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
